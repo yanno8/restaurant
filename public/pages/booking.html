@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="booking.css">
+  <title>Booking - Restaurant</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="back">
+      <img src="../images/download.jpg" width="20px" height="40px">
+    </div>
+    <div class="search">
+      <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/95-200.png" width="30px" height="30px">
+    </div>
+    <div class="inner">
+      <div class="product-picture">
+        <img src="http://www.anothermonkeythai.com/wp-content/uploads/2015/06/rest3.jpg">
+      </div>
+      <div class="product-title">
+        <p><strong>Steakville Restaurant</strong></p>
+      </div>
+      <div>
+        <label for="u">Full name</label>
+        <input id="name" autocomplete="off" autofocus>
+      </div>
+      <div class="product-text">
+        <p>Table for</p>
+      </div>
+      <div class="table-choice">
+        <div class="table minus">
+          <button><strong>-</strong></button>
+        </div>
+        <div class="table plus">
+         <button><strong>+</strong></button>
+        </div>
+        <div class="table-number">
+          <strong></strong>
+      </div>
+        
+      </div>
+       <div class="date-title">
+         <p>pick a date &amp; time<p>
+      </div>
+      <div class="date-picker">test
+        <input type="date" placeholder="mm/dd/yyyy" style="text-align:center;">
+        <input type="time" placeholder="00:00"/>
+      </div>
+      <div class="submit-btn">
+        <button class="submit" type="submit"><a href="./confirmation.html">Confirm</a></button>
+      </div>
+    </div>
+  </div>
+  <script
+    src="http://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous">
+  </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>            
+    var socket = io.connect('http://localhost:8080');        
+  </script>
+  <script src="booking.js"></script>
+</body>
+</html>

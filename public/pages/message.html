@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./message.css">
+    <title>Messages</title>
+</head>
+<body>
+    <section> 
+        <div class="card">
+            <div class="inner">
+               <div class="info">
+            <h2>New Reservation!</h2>
+        </div>
+    </section>
+<script
+    src="http://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous">            
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script>            
+var socket = io.connect('http://localhost:8080');        
+</script>
+<script src="message.js"></script>
+</body>  
+</html>

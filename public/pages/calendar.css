@@ -1,0 +1,158 @@
+body {
+    padding: 1rem;
+  }
+  
+  .panel {
+    width: 100%;
+    max-width: 1008px;
+    margin: 0 auto;
+    border: 1px solid #DCDDE0;
+    border-radius: 2px;
+    padding: 2rem 0;
+  }
+  
+  .schedule {
+    background: #fff;
+    width: 100%;
+    height: auto;
+    padding-top: 4rem;
+    border-top: 1px solid #DCDDE0;
+    border-bottom: 1px solid #DCDDE0;
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+  }
+  
+  .schedule-header {
+    background: #EAEAEC;
+    height: 4rem;
+    text-align: center;
+    font-size: 1.125rem;
+    color: rgba(0, 0, 0, 0.75);
+    border-bottom: 1px solid #DCDDE0;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-direction: row;
+  }
+  .schedule-header .schedule-col {
+    -webkit-box-pack: center;
+            justify-content: center;
+  }
+  
+  .schedule-body--helper {
+    max-height: 36rem;
+    overflow-y: scroll;
+    position: relative;
+  }
+  
+  .schedule-body {
+    height: 72rem;
+    display: -webkit-box;
+    display: flex;
+    flex-basis: 1;
+    -webkit-box-flex: 1;
+            flex-grow: 1;
+    flex-shrink: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-direction: row;
+  }
+  
+  .schedule-legend {
+    width: 4rem;
+    background: #F4F4F5;
+    border-right: 1px solid #DCDDE0;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-flex: 0;
+            flex-grow: 0;
+    flex-shrink: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+  }
+  
+  .schedule-legend--row {
+    height: 3rem;
+    line-height: 3rem;
+    margin-top: -1.5rem;
+    padding: 0 .5rem;
+    -webkit-box-pack: end;
+            justify-content: flex-end;
+    color: #555971;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-flex: 1;
+            flex-grow: 1;
+    flex-shrink: 1;
+  }
+  
+  .schedule-col {
+    display: -webkit-box;
+    display: flex;
+    flex-basis: 0;
+    -webkit-box-flex: 2;
+            flex-grow: 2;
+    flex-shrink: 2;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+  }
+  .schedule-col:not(:last-child) {
+    border-right: 1px solid #DCDDE0;
+  }
+  
+  .schedule-cell {
+    background: white;
+    height: 3rem;
+    display: -webkit-box;
+    display: flex;
+  }
+  .schedule-cell:not(:last-child) {
+    border-bottom: 1px solid #DCDDE0;
+  }
+  .schedule-cell:hover {
+    background-color: #eee;
+    cursor: pointer;
+  }
+  .schedule-cell.disabled:hover {
+    background-color: #fff;
+    cursor: default;
+  }
+  
+  .reservation-container {
+    width: 100%;
+    position: relative;
+  }
+  
+  .reservation-content {
+    color: white;
+    position: absolute;
+    width: 100%;
+    height: 300%;
+    padding: 4px;
+  }
+  
+  .block {
+    border-radius: 4px;
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    padding: 4px 6px;
+    cursor: pointer;
+  }
+  .block:hover {
+    background-color: #f50000;
+  }
+  
