@@ -1,41 +1,25 @@
 var express = require('express'),
     app = express(),
     http = require('http').Server(app),
-    bcrypt = require('bcrypt')
-    mysql = require('mysql'),
+    path = require('path'),
+    ejs = require('ejs'),
+    index = require('./routes/index'),
+    mongoose = require('mongoose'),
+    session = require('express-session'),
     io = require('socket.io')(http);
 
-const users = []
+mongoose.connect('mongodb://localhost/restaurant',
+{ useNewUrlParser: true})
+.then(() => console.log('Connexion à MongoDB réussie !'))
+.catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database : "restaurant"
-});
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-db.connect(function(err) {
-  if (err) throw err;
-  console.log("Connecté à la base de données!");
-});
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
 
-app.use(express.urlencoded({ extended: false}))
-app.use("/", express.static(__dirname + "/public"));
-
-app.post('/pages/admin/login.html', async function(req, res) {
-  try{
-    const hashedPassword = bcrypt.hash(req.body.password, 10)
-    users.push({
-      id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    })
-  } catch {
-    res.redirect('/pages/admin/admin.html')
-  }
-  console.log(users);
-})
+app.use(express.static(path.join(__dirname + '/public')));
 
   // ajouter et supprimer un socket.id de la sauvegarde apres une nouvelle connexion
 

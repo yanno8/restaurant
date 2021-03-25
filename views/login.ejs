@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../public/css/login.css">
     <title>Login</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
       <input type="password" />
     </label>
     <p class="forgot-pass">Forgot password?</p>
-    <button type="button" class="submit"><a href="./admin.html">Sign In</a></button>
+    <button type="button" class="submit"><a href="./admin.ejs">Sign In</a></button>
   </div>
   <div class="sub-cont">
     <div class="img">
@@ -56,11 +56,13 @@
         <input type="password" />
       </label>
       <button type="button" class="submit"><a href="./admin.html">Sign Up</a></button>
+      <div><span>Do you forgot password?</span><a href="/forgetpass">click here</a>
+      </div>
     </div>
   </div>
 </div>
 
-    <script src="login.js"></script> 
+    <script src="../public/js/login.js"></script> 
     <script
         src="http://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

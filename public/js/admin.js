@@ -12,7 +12,7 @@ Socket.on("use", function(infos) {
 });
 
 
-$(".sidebar-dropdown > a").click(function() {
+$(".sidebar-dropdown > a").on("click", function() {
     $(".sidebar-submenu").slideUp(200);
     if (
       $(this)
@@ -34,10 +34,10 @@ $(".sidebar-dropdown > a").click(function() {
     }
   });
   
-  $("#close-sidebar").click(function() {
+  $("#close-sidebar").on("click", function() {
     $(".page-wrapper").removeClass("toggled");
   });
-  $("#show-sidebar").click(function() {
+  $("#show-sidebar").on("click", function() {
     $(".page-wrapper").addClass("toggled");
   });
   
