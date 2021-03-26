@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="booking.css">
+  <link rel="stylesheet" type="text/css" href="./css/booking.css">
   <title>Booking - Restaurant</title>
 </head>
 <body>
   <div class="wrapper">
     <div class="back">
-      <img src="../public/images/download.jpg" width="20px" height="40px">
+      <img src="./images/download.jpg" width="20px" height="40px">
     </div>
     <div class="search">
       <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/95-200.png" width="30px" height="30px">
@@ -46,7 +46,7 @@
         <input type="time" placeholder="00:00"/>
       </div>
       <div class="submit-btn">
-        <button class="submit" type="submit"><a href="./confirmation.html">Confirm</a></button>
+        <button class="submit" type="submit"><a href="./confirmation">Confirm</a></button>
       </div>
     </div>
   </div>
@@ -59,6 +59,6 @@
   <script>            
     var socket = io.connect('http://localhost:8080');        
   </script>
-  <script src="../public/js/booking.js"></script>
+  <script src="./js/booking.js"></script>
 </body>
 </html>

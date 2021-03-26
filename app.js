@@ -2,8 +2,8 @@ var express = require('express'),
     app = express(),
     http = require('http').Server(app),
     path = require('path'),
-    ejs = require('ejs'),
-    index = require('./routes/index'),
+    engines = require('consolidate'),
+    index = require('./routes/index');
     mongoose = require('mongoose'),
     session = require('express-session'),
     io = require('socket.io')(http);
@@ -13,13 +13,16 @@ mongoose.connect('mongodb://localhost/restaurant',
 .then(() => console.log('Connexion à MongoDB réussie !'))
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(express.static(path.join('views')));
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname + '/public')));
+app.set('views', __dirname + '/views');
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
+
+app.use('/', index);
 
   // ajouter et supprimer un socket.id de la sauvegarde apres une nouvelle connexion
 
