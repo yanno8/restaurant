@@ -18,35 +18,33 @@ router.get('/message', (req, res, next) => {
 	return res.render('message.html');
 });
 
-router.get('/userLogin', (req, res, next) => {
+router.get('/login', (req, res, next) => {
 	return res.render('login.html');
 });
 
-router.post('/userLogin', (req, res, next) => {
+router.post('/login', (req, res, next) => {
 	//console.log(req.body);
-	User.findOne({ email: req.body.email }, (err, data) => {
+	User.findOne({ username: req.body.username }, (err, data) => {
 		if (data) {
 
 			if (data.password == req.body.password) {
 				//console.log("Done Login");
 				req.session.userId = data.unique_id;
 				//console.log(req.session.userId);
-				res.redirect('/booking');
+				res.redirect('/user');
 
 			} else {
-				res.redirect('/userLogin');
+				res.redirect('/login');
 			}
-		} else {
-			res.redirect('/userLogin');
 		}
 	});
 });
 
-router.get('/userRegister', (req, res, next) => {
+router.get('/register', (req, res, next) => {
 	return res.render('register.html');
 });
 
-router.post('/userRegister', (req, res, next) => {
+router.post('/register', (req, res, next) => {
 	console.log(req.body);
 	var personInfo = req.body;
 
@@ -86,14 +84,12 @@ router.post('/userRegister', (req, res, next) => {
 						});
 
 					}).sort({ _id: -1 }).limit(1);
-					res.send({ "Success": "You are registered, You can login now." });
+					res.redirect('/login');
 				} else {
-					res.send({ "Success": "Email is already used." });
+					res.redirect('/register');
 				}
 
 			});
-		} else {
-			res.send({ "Success": "password is not matched" });
 		}
 	}
 });
@@ -102,8 +98,50 @@ router.get('/admin', (req, res, next) => {
 	return res.render('admin.html');
 });
 
+router.post('/admin', (req, res, next) => {
+	//console.log(req.body);
+	User.findOne({ username: req.body.username }, (err, data) => {
+		if (data) {
+
+			if (data.password == req.body.password) {
+				//console.log("Done Login");
+				req.session.userId = data.unique_id;
+				//console.log(req.session.userId);
+				res.redirect('/dashboard');
+
+			} else {
+				res.redirect('/admin');
+			}
+		}
+	});
+});
+
+router.get('/dashboard', (req, res, next) => {
+	return res.render('dashboard.html');
+});
+
+router.get('/user', (req, res, next) => {
+	return res.render('user.html');
+});
+
 router.get('/calendar', (req, res, next) => {
 	return res.render('calendar.html');
+});
+
+router.get('/menu', (req, res, next) => {
+	return res.render('menu.html');
+});
+
+router.get('/dessert', (req, res, next) => {
+	return res.render('dessert.html');
+});
+
+router.get('/main_course', (req, res, next) => {
+	return res.render('main_course.html');
+});
+
+router.get('/starter_dish', (req, res, next) => {
+	return res.render('starter_dish.html');
 });
 
 module.exports = router;

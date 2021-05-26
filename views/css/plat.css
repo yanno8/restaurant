@@ -1,0 +1,335 @@
+
+  
+  
+  /* PAGE INSCRIPTION ATELIER */
+
+  .liste-atelier2{
+	margin:30px 0;
+  clear:both;
+  text-align:left!important;
+}
+
+.liste-atelier2 p {
+  width:90%; 
+}
+
+  .liste-atelier2 .date,.liste-atelier2 .quantite{display:none;}
+  
+  .liste-atelier2 .item{
+  width: 600px;
+  height: 250px;
+  background: #f0f0f0;
+  float:left;
+  margin: 20px;
+  box-shadow: 0 3px 7px -3px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  position: relative;
+  overflow:hidden;
+  color:#000;
+}
+
+.liste-atelier2 .item:hover{
+    box-shadow: 0 3px 15px 1px rgba(0, 0, 0, 0.3);
+   background: #eaebec;
+}
+
+.liste-atelier2 .item:hover .btn-next{
+	background: #b11;
+	transition-duration:0.2s
+}
+
+.liste-atelier2 .photo {
+  position: absolute;
+  left:0;
+  height: 250px;
+  width: 250px;
+  background: #000;
+}
+
+.liste-atelier2 .photo img{
+  width: 100%;
+  height: 100%;
+}
+
+.liste-atelier2 .text{
+  font-family: sans-serif;
+  color:#000;
+  position: absolute;
+  right:0;
+  width: 320px;
+  height: 250px;
+  padding-right:5px ;
+}
+
+.liste-atelier2 p.desc-ate{
+	width: 98%;
+	margin: 0;
+}
+
+.liste-atelier2 .item .text h2, .liste-atelier2 .item .date, .liste-atelier2 .item .quantite h2, .liste-atelier2 .item-carte h2{
+  margin-bottom:0px;
+  font-family:'AlrightSans-Black';
+  font-size: 18px;
+}
+
+.liste-atelier2 .duree{
+  font: 0.8em sans-serif;
+}
+
+.liste-atelier2 .btn-next{
+  position: absolute;
+  right:0;
+  bottom:0;
+  width: 350px;
+  height: 60px;
+  background: #000;
+  text-align:center;
+  line-height:60px;
+  font-size: 28px; 
+  font-family:'AlrightSans-Bold';
+  color:#fff;
+  
+ 
+
+}
+
+.liste-atelier2 .date{
+  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: #f0f0f0;
+  z-index: 9;
+}
+
+.liste-atelier2 .date h2{
+  text-align:center;
+}
+
+.liste-atelier2 .date .item-date{
+  width: 150px;
+  height: 60px;
+  background: #000;
+  font-size: 19px;
+  text-align:center;
+  line-height:31px;
+  padding: 2px 15px 2px;
+  color:#fff;
+  float: left;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.liste-atelier2 .date .item-date.complet,.liste-atelier2 .date .item-date.complet:hover{
+  background: #CCC;
+  color:#DDD;
+  cursor:default;
+
+}
+
+.liste-atelier2 .date .item-date:hover{
+  	background: #b11;
+	transition-duration:0.2s
+}
+
+
+
+.listeCarteCadeau{
+	width: 100%;
+	margin: 0 auto;
+}
+
+.liste-atelier2 .item .item-carteCadeau{
+	 display: block;
+ padding : 0 10px;
+  height: 40px;
+  background: #000;
+  color:#fff;
+  line-height:40px!important;
+  float: left;
+  margin: 10px;
+  text-decoration:none;
+  font: 15px 'AlrightSans-Bold';
+	text-align:center;
+}
+
+.liste-atelier2 .item .item-carteCadeau:hover{
+	background: #b11;
+	transition-duration:0.2s
+}
+
+.liste-atelier2 .item .quantite{
+  text-align:center;
+	  position: absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: #f0f0f0;
+  z-index: 11;
+}
+ 
+.liste-atelier2 .item .quantite .liste-quantite{
+  width: 350px;
+  margin: 35px auto 0;
+}
+
+.liste-atelier2 .item .quantite .liste-quantite a{
+  display: block;
+  width: 50px;
+  height: 40px;
+  background: #000;
+  color:#fff;
+  line-height:50px;
+  float: left;
+  margin: 10px;
+  text-decoration:none;
+  font: 30px 'AlrightSans-Bold'
+}
+
+.liste-atelier2 .item .quantite .liste-quantite a:hover{
+	background: #b11;
+	transition-duration:0.2s
+}
+
+.liste-atelier2 .back a{
+	width: 10px;
+	height: 10px;
+	background: #000;
+	color:#fff;
+	text-decoration:none;
+	padding: 10px;
+	position: absolute;
+	z-index: 88;
+	left:0;
+	top:0;
+	cursor: pointer;
+	
+}
+
+.liste-atelier2 .back i {
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+	
+}
+
+.rightArrow {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.leftArrow {
+   transform:translate(0,-3px) rotate(135deg);
+    -webkit-transform:translate(0,-3px) rotate(135deg);
+}
+
+.date h2, .quantite h2{
+		margin-left: 15px;
+	}
+
+
+ @media screen and (max-width: 1281px) {
+
+.liste-atelier2 {
+    margin: 30px auto 30px;
+    clear: both;
+    text-align: left!important;
+    width: 1080px;
+}
+
+.liste-atelier2 .item {
+    width: 500px;
+    height: 200px;
+}
+
+.liste-atelier2 .photo {
+width: 200px;
+height: 200px;
+padding-right: 0;
+	}
+
+	
+
+
+	.liste-atelier2 .item .text h2{
+		font-size: 16px;
+	}
+
+	.liste-atelier2 .duree {
+    font: 0.7em sans-serif;
+}
+
+.liste-atelier2 p.desc-ate {
+    width: 98%!important;
+    margin: 0;
+    font-size: 14px;
+}
+
+.liste-atelier2 .btn-next {
+width: 300px;
+height: 40px;
+line-height: 40px;
+font-size: 28px;
+}
+
+.liste-atelier2 .text {	
+width: 290px;
+    height: 160px;
+	}
+
+ }
+
+
+  @media screen and (max-width: 1126px) {
+
+
+.liste-atelier2 {
+    margin: 30px auto 30px;
+    clear: both;
+    text-align: left!important;
+    width: 600px;
+}
+
+.liste-atelier2 .item {
+    width: 600px;
+    height: 250px;
+}
+
+.liste-atelier2 .photo {
+width: 250px;
+height: 250px;
+padding-right: 0;
+	}
+
+
+
+	.liste-atelier2 .item .text h2{
+		font-size: 18px;
+	}
+
+	.liste-atelier2 .duree {
+    font: 0.8em sans-serif;
+}
+
+.liste-atelier2 p.desc-ate {
+    width: 98%!important;
+    margin: 0;
+    font-size: 16px;
+}
+
+.liste-atelier2 .btn-next {
+width: 350px;
+height: 60px;
+line-height: 60px;
+font-size: 28px;
+}
+
+.liste-atelier2 .text {	
+width: 290px;
+    height: 160px;
+	}
+
+  }

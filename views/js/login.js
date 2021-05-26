@@ -5,7 +5,7 @@ $(document).on("ready", function () {
 
     $.ajax({
       type: 'POST',
-      url: '/userLogin',
+      url: '/login',
       data: $('#form').serialize(),
       dataType: "json",
       success: (response) => {
