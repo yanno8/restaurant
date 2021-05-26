@@ -13,6 +13,8 @@ mongoose.connect('mongodb://localhost/restaurant',
 .then(() => console.log('Connexion à MongoDB réussie !'))
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+app.use(session({secret: 'your secret', saveUninitialized: false, resave: true}));
+
 app.use(express.static(path.join('views')));
 
 app.use(express.urlencoded({ extended: true }))
@@ -23,6 +25,20 @@ app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 
 app.use('/', index);
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  const err = new Error('File Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+// define as the last app.use callback
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send(err.message);
+});
 
   // ajouter et supprimer un socket.id de la sauvegarde apres une nouvelle connexion
 

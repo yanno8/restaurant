@@ -1,11 +1,11 @@
-$(document).ready( () => {
+$(document).on("ready", function () {
 
-    $( "#form1" ).submit( (event) => {
-        event.preventDefault();
+    $( "#form1" ).on("click", function (event) {
+      event.preventDefault();
 
         $.ajax({
             type: 'POST',
-            url: '/',
+            url: '/userRegister',
             data: $('#form1').serialize(),
             dataType: "json",
             success: (response) => {
@@ -19,7 +19,7 @@ $(document).ready( () => {
                          document.getElementById("check").innerHTML="";
                      },3000);
                      if (response.Success=="You are registered,You can login now.") {
-                         document.getElementById("aa").click();
+                         document.getElementById("aaa").click();
                      };
                  },
                  error: () => {

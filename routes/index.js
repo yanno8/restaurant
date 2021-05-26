@@ -31,13 +31,13 @@ router.post('/userLogin', (req, res, next) => {
 				//console.log("Done Login");
 				req.session.userId = data.unique_id;
 				//console.log(req.session.userId);
-				res.send({ "Success": "Success!" });
+				res.redirect('/booking');
 
 			} else {
-				res.send({ "Success": "Wrong password!" });
+				res.redirect('/userLogin');
 			}
 		} else {
-			res.send({ "Success": "This Email Is not registered!" });
+			res.redirect('/userLogin');
 		}
 	});
 });
@@ -50,7 +50,9 @@ router.post('/userRegister', (req, res, next) => {
 	console.log(req.body);
 	var personInfo = req.body;
 
-
+     /*if (personInfo.password.length < 6) {
+    res.send({ msg: 'Password must be at least 6 characters' });
+  }*/
 	if (!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf) {
 		res.send();
 	} else {
@@ -71,8 +73,7 @@ router.post('/userRegister', (req, res, next) => {
 						var newPerson = new User({
 							unique_id: c,
 							email: personInfo.email,
-							firstName: personInfo.firstName,
-							lastName: personInfo.lastName,
+							username: personInfo.username,
 							password: personInfo.password,
 							passwordConf: personInfo.passwordConf
 						});
@@ -96,6 +97,7 @@ router.post('/userRegister', (req, res, next) => {
 		}
 	}
 });
+
 router.get('/admin', (req, res, next) => {
 	return res.render('admin.html');
 });

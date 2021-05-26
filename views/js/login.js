@@ -5,7 +5,7 @@ $(document).on("ready", function () {
 
     $.ajax({
       type: 'POST',
-      url: '/login',
+      url: '/userLogin',
       data: $('#form').serialize(),
       dataType: "json",
       success: (response) => {
@@ -19,7 +19,7 @@ $(document).on("ready", function () {
                  document.getElementById("check").innerHTML="";
                },3000);
                if (response.Success=="Success!") {
-                 document.getElementById("aa").click();
+                 document.getElementById("aaaa").click();
                };
              },
              error: () => {
