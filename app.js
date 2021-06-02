@@ -39,6 +39,13 @@ io.on('connection', function (socket) {
   socket.to('room1').emit('char-message', message);
   });
 
+// reception et émission du login full-name
+
+socket.on('full-name', function (pseudo) {
+  console.log('from login: ', pseudo);
+  socket.to('room1').emit('user', pseudo);
+  });
+
   // reception et emission du nombre de places choisis
 
   socket.on('users', function(infos) {

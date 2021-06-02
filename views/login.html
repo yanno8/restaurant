@@ -7,6 +7,10 @@
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="./css/login.css">
+	<script src="/socket.io/socket.io.js"></script>
+	<script>            
+	  var socket = io.connect('http://localhost:8080');        
+	</script>
   <script src="./js/login.js"></script>
 </head>
 <body>
@@ -16,9 +20,9 @@
 		</div>
 		<div class="form-group">
 			<form id="form" method="post" >
-				<input type="text" name="username" placeholder="Username" required="" class="form-control"><br/>
+				<input id="name" type="text" name="username" placeholder="Username" required="" class="form-control"><br/>
 				<input type="password" name="password" placeholder="Password" required="" class="form-control"><br/>
-				<input type="submit" value="Login" class="btn btn-success">
+				<input id="submit" type="submit" value="Login" class="btn btn-success">
 			</form>
 		</div>
 		<div class="mssg bg-danger">
@@ -26,11 +30,11 @@
 		</div>
 		<div id="LangTable"><a href="/booking" id="aa"></a>
 		</div>
-		<div><span>Do you forgot password?</span><a href="/forgetpass">click here</a>
+		<div><span>Do you forgot password?</span><a href="/forget-pass">click here</a>
       <div class="mssg bg-danger">
         <span  ></span>
       </div>
-    <div><span>New Here?</span><a href="/userRegister">click here</a>  
+    <div><span>New Here?</span><a href="/register">click here</a>  
 		</div>
 	</div>
 </body>

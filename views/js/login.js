@@ -19,7 +19,7 @@ $(document).on("ready", function () {
                  document.getElementById("check").innerHTML="";
                },3000);
                if (response.Success=="Success!") {
-                 document.getElementById("aaaa").click();
+                 document.getElementById("aa").click();
                };
              },
              error: () => {
@@ -27,4 +27,16 @@ $(document).on("ready", function () {
            })
   });
 
+});
+
+$('#submit').on('click', function (e) {
+  e.preventDefault();
+  var pseudo = {
+    username = $('#name').val()
+  };
+  $('#name').val();
+  socket.emit('full-name', pseudo)
+  // console.log(pseudo);
+  if (pseudo.username.trim().length !== 0) {
+  }
 });

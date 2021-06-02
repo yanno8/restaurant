@@ -45,7 +45,7 @@ router.get('/register', (req, res, next) => {
 });
 
 router.post('/register', (req, res, next) => {
-	console.log(req.body);
+	//  console.log(req.body);
 	var personInfo = req.body;
 
      /*if (personInfo.password.length < 6) {
@@ -142,6 +142,18 @@ router.get('/main_course', (req, res, next) => {
 
 router.get('/starter_dish', (req, res, next) => {
 	return res.render('starter_dish.html');
+});
+
+router.get('/fast-food', (req, res, next) => {
+	return res.render('fast-food.html');
+});
+
+router.get('/coffee', (req, res, next) => {
+	return res.render('coffee.html');
+});
+
+router.get('/forget-pass', (req, res, next) => {
+	return res.render('forgetPass.html');
 });
 
 module.exports = router;

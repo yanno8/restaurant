@@ -1,10 +1,7 @@
-const { Socket } = require("socket.io-client");
-
-Socket.on("use", function(infos) {
+socket.on("user", function(pseudo) {
   $('.user-info').append(`<span class="user-name">
-  <strong>${infos.username}</strong>
+  <strong>${pseudo.username}</strong>
 </span>
-<span class="user-role">Administrator</span>
 <span class="user-status">
   <i class="fa fa-circle"></i>
   <span id="online">Online</span>

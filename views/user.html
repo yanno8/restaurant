@@ -24,13 +24,6 @@
             <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
           </div>
           <div class="user-info">
-            <span class="user-name">Yann
-              <strong>Sonwa</strong>
-            </span>
-            <span class="user-status">
-              <i class="fa fa-circle"></i>
-              <span>Online</span>
-            </span>
           </div>
         </div>
         <!-- sidebar-header  -->
@@ -106,6 +99,10 @@
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous">
   </script>    
+  <script src="/socket.io/socket.io.js"></script>
+  <script>            
+    var socket = io.connect('http://localhost:8080');        
+  </script>
   <script src="./js/user.js"></script>
 </body>
 </html>
