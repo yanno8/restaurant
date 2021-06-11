@@ -152,6 +152,10 @@ router.get('/coffee', (req, res, next) => {
 	return res.render('coffee.html');
 });
 
+router.get('/order', (req, res, next) => {
+	return res.render('order.html');
+});
+
 router.get('/forget-pass', (req, res, next) => {
 	return res.render('forgetPass.html');
 });

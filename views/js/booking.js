@@ -8,9 +8,9 @@ $(".submit").on("click", function (e) {
     // place : $(".table-number>strong").html(number)
   };
   $("#name").val("");
+  if (pseudo.username.trim().length !== 0) {
   socket.emit("chat-message", message);
   // console.log(message);
-  if (message.fullName.trim().length !== 0) {
   }
 });
 

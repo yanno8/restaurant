@@ -29,14 +29,14 @@ $(document).on("ready", function () {
 
 });
 
-$('#submit').on('click', function (e) {
+$("#submi").on("click", function (e) {
   e.preventDefault();
   var pseudo = {
-    username = $('#name').val()
+    username = $("#n").val()
   };
-  $('#name').val();
-  socket.emit('full-name', pseudo)
-  // console.log(pseudo);
+  $("#n").val("");
   if (pseudo.username.trim().length !== 0) {
+  socket.emit("full-name", pseudo)
+  // console.log(pseudo);
   }
 });
