@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-userSchema = new Schema( {
+waiterSchema = new Schema( {
 	
-	unique_id: Number,
+	matricule: Number,
 	email: String,
 	username: String,
 	phone: Number,
@@ -19,6 +19,6 @@ userSchema = new Schema( {
         default: Date.now 
     },
 }),
-User = mongoose.model('User', userSchema);
+Waiter = mongoose.model('Waiter', userSchema);
 
-module.exports = User;
+module.exports = Waiter;

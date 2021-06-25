@@ -2,55 +2,53 @@
 <html>
 <head>
   <title>Booking - Restaurant</title>
-  <link rel="stylesheet" href="./css/booking.css">
-</head>
-<body>
-  <div class="wrapper">
-    <div class="back">
-      <img src="./images/download.jpg" width="20px" height="40px">
-    </div>
-    <div class="search">
-      <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/95-200.png" width="30px" height="30px">
-    </div>
-    <div class="inner">
-      <div class="product-picture">
-        <img src="http://www.anothermonkeythai.com/wp-content/uploads/2015/06/rest3.jpg">
-      </div>
-      <div class="product-title">
-        <p><strong>ROSA - Restaurant</strong></p>
-      </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/booking.css"> 
+  </head>
+  <body>
+    <div class="col-md-4 col-md-offset-4">
       <div>
-        <label for="u">Full name</label>
-        <input id="name" autocomplete="off" autofocus>
+        <p>Booking Table
+        </p>
       </div>
-      <div class="product-text">
-        <p>Table for</p>
+      <div class="form-group">
+        <form id="form1" method="post">
+
+          <label>Title</label> 
+          <input type="text" name="title" placeholder="" required="" class="form-control"><br/>
+          <label>First Name</label> 
+          <input type="text" name="firstName" placeholder="" required="" class="form-control"><br/>
+          <label>Last Name</label> 
+          <input type="text" name="lastName" placeholder="" required="" class="form-control"><br/>
+          <label>Email</label> 
+          <input type="email" name="email" placeholder="" required="" class="form-control"><br/>
+          <label>Confirm Email</label> 
+          <input type="email" name="confEmail" placeholder="" required="" class="form-control"><br/>
+          <label>telephone</label> 
+          <input type="text" name="telephone" placeholder="" required="" class="form-control"><br/>
+          <label>City</label> 
+          <input type="text" name="city" placeholder="" required="" class="form-control"><br/>
+          <label>Date</label> 
+          <input type="date" name="date" placeholder="" required="" class="form-control"><br/>
+          <label>Time</label> 
+          <input type="time" name="time" placeholder="" required="" class="form-control"><br/>
+          <label>Table</label> 
+          <input type="text" name="table" placeholder="" required="" class="form-control"><br/>
+          <input type="submit" value="Register" class="btn btn-success">
+        </form>
       </div>
-      <div class="table-choice">
-        <div class="table minus">
-          <button><strong>-</strong></button>
-        </div>
-        <div class="table plus">
-         <button><strong>+</strong></button>
-        </div>
-        <div class="table-number">
-          <strong></strong>
+      
+  <span class="image-ronde-bg"></span>
+      <div class="mssg bg-danger">
+        <span id="check"></span>
       </div>
-        
-      </div>
-       <div class="date-title">
-         <p>pick a date &amp; time<p>
-      </div>
-      <div class="date-picker">test
-        <input type="date" placeholder="mm/dd/yyyy" style="text-align:center;">
-        <input type="time" placeholder="00:00"/>
-      </div>
-      <div class="submit-btn">
-        <button class="submit" type="submit"><a href="./confirmation">Confirm</a></button>
+      <div id="LangTable"><a href="/login" id="aaa"></a>
       </div>
     </div>
-  </div>
-  <script
+    <script 
     src="http://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous">

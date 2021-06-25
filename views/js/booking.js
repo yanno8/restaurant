@@ -1,16 +1,16 @@
- // envoi du full-name et du message
+// envoi du full-name et du message
 
 $(".submit").on("click", function (e) {
   e.preventDefault();
   var message = {
     fullName : $("#name").val(),
     text : "made a reservation for a table in your restaurant for",
-    // place : $(".table-number>strong").html(number)
+    place : $(".table-number>strong").text()
   };
   $("#name").val("");
-  if (pseudo.username.trim().length !== 0) {
+  if (message.fullName.trim().length !== 0) {
   socket.emit("chat-message", message);
-  // console.log(message);
+  console.log(message);
   }
 });
 
@@ -18,25 +18,32 @@ $(".submit").on("click", function (e) {
   console.log(message);
 });*/   
 
-$(document).ready(function() {
-  var number = 1;
-  $(".table-number>strong").html(number);
+$(document).on("ready", function () {
+
+  $( "#form1" ).on("click", function (event) {
+    event.preventDefault();
+
+      $.ajax({
+          type: 'POST',
+          url: '/booking',
+          data: $('#form1').serialize(),
+          dataType: "json",
+          success: (response) => {
+              //alert("a"); 
+              //console.log(response.Success);
+              $('#form1')[0].reset();
+
+              document.getElementById("check").innerHTML=response.Success;
+                   //ADD THIS CODE
+                   setTimeout( () => {
+                       document.getElementById("check").innerHTML="";
+                   },3000);
+                   if (response.Success=="You are registered,You can login now.") {
+                       document.getElementById("aaa").click();
+                   };
+               },
+               error: () => {
+               }
+           })
+  });
 });
-
-$(".table.plus").on("click",function(){
-  number = $(".table-number>strong").text();
-  number = parseInt(number) + 1;
-  $(".table-number>strong").html(number);
-})
-
-$(".table.minus").on("click",function(){
-  number = $(".table-number>strong").text();
-  number = parseInt(number) - 1;
-  /* if(number == 2){
-      $(".table.minus").css("button:disabled");
-  } */
-  if(number >= 1){
-      $(".table-number>strong").html(number);
-  }
-})
-
