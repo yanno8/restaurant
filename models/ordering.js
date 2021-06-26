@@ -13,6 +13,7 @@ orderingSchema = new Schema( {
     city: String,
     confEmail: String,
     table: Number,
+    foods: String,
     title: String,
     date: Date,
     createdAt: { 

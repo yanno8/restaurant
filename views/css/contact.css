@@ -2,6 +2,11 @@
 
 body { background:rgb(30,30,40); }
 form { max-width:420px; margin:50px auto; }
+div{
+  position: relative;
+  left: 43%;
+  color: #a96700;
+}
 
 .feedback-input {
   color:white;
@@ -11,7 +16,7 @@ form { max-width:420px; margin:50px auto; }
   border-radius: 5px;
   line-height: 22px;
   background-color: transparent;
-  border:2px solid #CC6666;
+  border:2px solid #a96700;
   transition: all 0.3s;
   padding: 13px;
   margin-bottom: 15px;
@@ -31,11 +36,11 @@ textarea {
 [type="submit"] {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   width: 100%;
-  background:#CC6666;
+  background:rgb(231, 143, 27);
   border-radius:5px;
   border:0;
   cursor:pointer;
-  color:white;
+  color:rgb(30,30,40);
   font-size:24px;
   padding-top:10px;
   padding-bottom:10px;
@@ -43,4 +48,4 @@ textarea {
   margin-top:-4px;
   font-weight:700;
 }
-[type="submit"]:hover { background:#CC4949; }
+[type="submit"]:hover { background:#eebf26; }

@@ -1,14 +1,19 @@
 // envoi du full-name et du message
 
-$(".submit").on("click", function (e) {
+$("#submit").on("click", function (e) {
   e.preventDefault();
   var message = {
-    fullName : $("#name").val(),
-    text : "made a reservation for a table in your restaurant for",
-    place : $(".table-number>strong").text()
+    title : $("#title").val(),
+    firstName : $("#name1").val(),
+    lastName : $("#name2").val(),
+    date : $("#date").val(),
+    time : $("#time").val(),
+    text1 : "made a reservation for a table of",
+    text2 : "on",
+    text3 : "at",
+    table : $("#table").val()
   };
-  $("#name").val("");
-  if (message.fullName.trim().length !== 0) {
+  if (message.firstName.trim().length !== 0 && message.lastName.trim().length !== 0 && message.date.trim().length !== 0 && message.time.trim().length !== 0 && message.title.trim().length !== 0 && message.place.trim().length !== 0) {
   socket.emit("chat-message", message);
   console.log(message);
   }

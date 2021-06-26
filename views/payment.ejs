@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment gateway mock</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.rawgit.com/jessepollak/card/635252d7/dist/jquery.card.js"></script>
+
+    <style>
+        body {
+            padding-top: 20px;
+        }
+
+        .exp_mon,
+        .exp_year {
+            width: 50px;
+            display: inline;
+        }
+    </style>
+
+    <style type="text/css">
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .modal-confirm {
+            color: #434e65;
+            width: 525px;
+        }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .modal-confirm .ok {
+            background: green;
+        }
+
+        .modal-confirm .error {
+            background: #666666;
+        }
+
+
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+            text-align: center;
+            margin: -20px -20px 0;
+            border-radius: 5px 5px 0 0;
+            padding: 35px;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        .modal-confirm .form-control,
+        .modal-confirm .btn {
+            min-height: 40px;
+            border-radius: 3px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #fff;
+            text-shadow: none;
+            opacity: 0.5;
+        }
+
+        .modal-confirm .close:hover {
+            opacity: 0.8;
+        }
+
+        .modal-confirm .icon-box {
+            color: #fff;
+            width: 95px;
+            height: 95px;
+            display: inline-block;
+            border-radius: 50%;
+            z-index: 9;
+            border: 5px solid #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .modal-confirm .icon-box i {
+            font-size: 64px;
+            margin: -4px 0 0 -4px;
+        }
+
+        .modal-confirm.modal-dialog {
+            margin-top: 80px;
+        }
+
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #eeb711;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border-radius: 30px;
+            margin-top: 10px;
+            padding: 6px 20px;
+            border: none;
+        }
+
+        .modal-confirm .btn:hover,
+        .modal-confirm .btn:focus {
+            background: #eda645;
+            outline: none;
+        }
+
+        .modal-confirm .btn span {
+            margin: 1px 3px 0;
+            float: left;
+        }
+
+        .modal-confirm .btn i {
+            margin-left: 1px;
+            font-size: 20px;
+            float: right;
+        }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <% if (typeof popup !== 'undefined' ) { %>
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#myModal').modal('show');
+            });
+        </script>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header <% if ( popup.type == 'order_invalid' ) { %> error<% }else{ %>ok<% } %>">
+                        <div class="icon-box">
+                            <i class="glyphicon <% if ( popup.type == 'order_invalid' ) { %> glyphicon-floppy-remove<% }else{ %>glyphicon-ok<% } %>"></i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <br>
+                    <div class="modal-body ">
+
+                        <% if ( popup.type == 'order_invalid' ) { %>
+                            <h4>Record no found</h4>
+                            <p>Please input corrent customer name and payment reference code.</p>
+                        <% } %>
+
+                        <% if ( popup.type == 'order_valid' ) { %>
+                            <h4>Order Detail</h4>
+                            <br>
+                            <p>The order infomation are listed below:</p>
+                            <p>Customer Name:</p>
+                            <p>
+                                <%=popup.name%>
+                            </p>
+                            <p>Customer Phone Number:</p>
+                            <p>
+                                <%=popup.phone%>
+                            </p>
+                            <p>Currency:</p>
+                            <p>
+                                <%=popup.currency%>
+                            </p>
+                            <p>Price:</p>
+                            <p>
+                                <%=popup.price%>
+                            </p>
+                        <% } %>
+
+                        <% if (popup.type == 'order_code' ) { %>
+                            <h4>Payment success</h4>
+                            <p>Please copy your payment reference code for payment checking.</p>
+                            <p>payment reference code:</p>
+                            <p>
+                                <%=popup.paymentId %>
+                            </p>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <form action="submitOrder" id="submitOrder" method="post">
+                                <h4>Order Section</h4>
+                                <p>
+                                    <label>Customer Name*</label>
+                                    <input name="name" type="text" class="form-control">
+                                </p>
+                                <p>
+                                    <label>Customer Phone Number*</label>
+                                    <input name="phone" type="text" class="form-control">
+                                </p>
+                                <p>
+                                    <label>Currency (HKD, USD, AUD, EUR, JPY, CNY)*</label>
+                                    <select name="currency" class="form-control">
+                                        <option value="HKD">HKD</option>
+                                        <option value="USD">USD</option>
+                                        <option value="AUD">AUD</option>
+                                        <option value="HKD">HKD</option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <label>Price*</label>
+                                    <input name="price" type="text" class="form-control">
+                                </p>
+                                <hr />
+                                <h4>Payment Section</h4>
+                                <div class="card-js">
+                                    <p>
+                                        <div>Credit Card Holder Name*</div>
+                                        <input name="cardname" type="text" class="form-control cardname">
+                                    </p>
+                                    <p>
+                                        <div>Credit Card Number*</div>
+                                        <input name="cardnumber" type="text" class="form-control cardnumber">
+                                    </p>
+                                    <p>
+                                        <div>Credit Card Expiration*</div>
+                                        <input name="expiry" type="text" class="form-control expiry">
+                                    </p>
+                                    <p>
+                                        <div>Credit Card CCV*</div>
+                                        <input name="cvc" type="text" class="form-control cvc">
+                                    </p>
+
+                                </div>
+
+
+                                <input type="submit" value="Submit" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <form action="submitCheck" id="submitCheck" method="post" id="check">
+                                <h4>Payment Checking Form​</h4>
+                                <p>
+                                    <label>Customer Name*</label>
+                                    <input name="check_name" type="text" class="form-control">
+                                </p>
+                                <p>
+                                    <label>Payment Reference Code*</label>
+                                    <input name="check_code" type="text" class="form-control">
+                                </p>
+                                <input type="submit" value="check" />
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <div class='card-wrapper'></div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <script>
+                    $(document).ready(function () {
+                        //add check AE validator
+                        jQuery.validator.addMethod("checkAECard", function (value, element) {
+                            debugger;
+                            if (value.match(/^3[47]\d{13}/)) {
+                                return false;
+                            }else{
+                                return true;
+                            }
+                        }, "“AMEX is not supported");
+
+
+                        //add check HKD validator
+                        jQuery.validator.addMethod("checkCurrency", function (value, element) {
+                            debugger;
+                            if (value != 'HKD') {
+                                return false;
+                            }else{
+                                return true;
+                            }
+                        }, "Coming Soon, Please select HKD");
+
+                        $("#submitOrder").validate({
+                            rules: {
+                                name: "required",
+                                phone: "required",
+                                currency: {
+                                    required: true,
+                                    checkCurrency: true
+                                },
+                                price: {
+                                    required: true,
+                                    number: true
+                                },
+                                cardname: {
+                                    required: true
+                                },
+                                cardnumber: {
+                                    required: true,
+                                    checkAECard: true,
+                                    creditcard: true
+                                },
+                                expiry: {
+                                    required: true,
+                                },
+                                cvc: {
+                                    required: true,
+                                },
+                            }
+                        })
+                    });
+
+                    $("#submitCheck").validate({
+                        rules: {
+                            check_name: "required",
+                            check_code: "required"
+                        }
+                    });
+
+                    $("#submitOrder").card({
+                        container: '.card-wrapper',
+                        formSelectors: {
+                            numberInput: 'input.cardnumber', 
+                            expiryInput: 'input.expiry', 
+                            cvcInput: 'input.cvc', 
+                            nameInput: 'input.cardname' 
+                        },
+                        messages: {
+                            validDate: 'expire\ndate',
+                            monthYear: 'mm/yy'
+                        }
+                    });
+                </script>
+</body>
+
+</html>

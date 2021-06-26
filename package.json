@@ -9,6 +9,9 @@
   "author": "Yanno Tiger",
   "license": "ISC",
   "dependencies": {
+    "nodemailer": "^6.1.0",
+    "serve-favicon": "^2.5.0",
+    "paypal-rest-sdk": "^1.8.1",
     "axios": "^0.19.2",
     "query-string": "^6.10.1",
     "consolidate": "^0.16.0",

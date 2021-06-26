@@ -1,12 +1,21 @@
 const { data } = require('jquery');
-
 var express = require('express'),
+    paypal = require('paypal-rest-sdk'),
     router = express.Router(),
     User = require('../models/user'),
     Waiter = require('../models/waiter'),
     Deliver = require('../models/deliver'),
     Admin = require('../models/admin'),
-	Booking = require('../models/booking');
+	Booking = require('../models/booking'),
+	Payment = require('../models/payment'),
+	Ordering = require('../models/ordering');
+
+//config paypal
+paypal.configure({
+    'mode': 'sandbox', //sandbox or live
+    'client_id':process.env.PAYPAL_ID,
+    'client_secret': process.env.PAYPAL_SECRET
+});
 
 router.get('/', (req, res, next) => {
 	return res.render('index.html');
@@ -349,16 +358,199 @@ router.get('/coffee', (req, res, next) => {
 	return res.render('coffee.html');
 });
 
-router.get('/order', (req, res, next) => {
-	return res.render('order.html');
+router.get('/ordering', (req, res, next) => {
+	return res.render('ordering.html');
+});
+router.post('/ordering', (req, res, next) => {
+	var orderingInfo = req.body;
+
+    if (orderingInfo.telephone.length != 9) {
+    res.send({ msg: 'the phone number must be 9 numbers' });
+	}
+	if (!orderingInfo.email || !orderingInfo.city || !orderingInfo.telephone || !orderingInfo.confEmail || !orderingInfo.lastName || !orderingInfo.date || !orderingInfo.firstName || !orderingInfo.time || !orderingInfo.place) {
+	res.send();
+	} else {
+			if (!data) {
+				var c;
+				Ordering.findOne({}, (err, data) => {
+					if (data) {
+						// console.log(data);
+					    c = data.unique_id + 1;
+						} else {
+							c = 1;
+					}
+					var ordering = new Ordering({
+						unique_id: c,
+						email: orderingInfo.email,
+						place: orderingInfo.place,
+						city: orderingInfo.city,
+						date: orderingInfo.date,
+						lastName: orderingInfo.lastName,
+						firstName: orderingInfo.firstName,
+						telephone: orderingInfo.telephone,
+						confEmail: orderingInfo.confEmail,
+						time: orderingInfo.time,
+						foods: orderingInfo.foods,
+						title: orderingInfo.title
+					});
+
+					ordering.save((err, Person) => {
+						if (err)
+							console.log(err);
+						else
+							console.log('Success');
+					});
+
+					}).sort({ _id: -1 }).limit(1);
+					res.redirect('/payment');
+				} else {
+					res.redirect('/ordering');
+			}
+		}
 });
 
 router.get('/forget-pass', (req, res, next) => {
 	return res.render('forgetPass.html');
 });
 
+
+
 router.get('/chat', (req, res, next) => {
 	return res.render('chat.html');
+});
+
+router.get('/payment', (req, res, next) => {
+	return res.render('payment.ejs');
+});
+
+router.post('/submitOrder', function (req, res) {
+
+    //create paypal request
+    var create_payment_json = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": process.env.PAYPAL_RETURN_URL,
+            "cancel_url": process.env.PAYPAL_CANCEL_URL
+        },
+        "transactions": [{
+            "amount": {
+                "currency": req.body.currency,
+                "total": req.body.price
+            },    
+            "item_list":
+            {
+              "items": [
+              {
+                "quantity": "1",
+                "name": "payment mock test item",
+                "price": req.body.price,
+                "currency": req.body.currency,
+                "description": "payment mock test item",
+              }]
+            },
+        }]
+    };
+
+
+    paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            return console.log(error)
+        } 
+
+        for (let i = 0; i < payment.links.length; i++) {
+            if (payment.links[i].rel === 'approval_url') {
+
+                //when paypal return paymentid and get approvalurl, write payment to mongo
+                var payment = new Payment({
+                    name: req.body.name,
+                    price: req.body.price,
+                    currency: req.body.currency,
+                    phone: req.body.phone,
+                    paymentid: payment.id,
+                    status: 'open',
+                    lastupdatetime: new Date()
+                })
+                payment.save(function (error, data) {
+                    if (error) {
+                        return console.log(error)
+                    }
+                })
+
+                //redirect to paypal
+                res.redirect(payment.links[i].href);
+            }
+        }
+    
+    });
+});
+
+//when payment success
+router.get('/success', function (req, res) {
+
+    var paymentId = req.query.paymentId;
+
+    var payerId = {
+        'payer_id': req.query.PayerID
+    };
+
+    paypal.payment.execute(paymentId, payerId, function (error, payment) {
+        if (error) {
+            return console.log(error);
+        } 
+        if (payment.state === 'approved') {
+            Payment.findOne({
+                paymentid: req.query.paymentId
+            }, function (err, data) {
+                if (err) {
+                    return console.log(err);
+                }
+                data.status = 'approved';
+                data.save();
+
+                //pass data to ejs to show payment code popup
+                var popup = {};
+                popup.type = 'order_code';
+                popup.paymentId = req.query.paymentId;
+                res.render('/payment', {
+                    popup: popup
+                });
+            });
+        } else {
+            res.send('payment not successful');
+        }
+    });
+});
+
+//when submit check order
+router.post('/submitCheck', function (req, res) {
+    Payment.find({
+        paymentid: req.body.check_code,
+        name: req.body.check_name,
+        status: 'approved'
+    }, function (error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        var popup = {};
+        if (data.length != 0) {
+            //pass data to ejs to show order detail popup
+            popup = data[0];
+            popup.type = 'order_valid';
+            res.render('/payment', {
+                popup: popup
+            });
+        } else {
+            //pass data to ejs to show record not found popup
+            popup.type = 'order_invalid';
+            res.render('/payment', {
+                popup: popup
+            });
+        }
+    });
+
 });
 
 module.exports = router;

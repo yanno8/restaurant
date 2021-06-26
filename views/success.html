@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment gateway mock</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/payment.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.rawgit.com/jessepollak/card/635252d7/dist/jquery.card.js"></script>
+</head>
+<body>
+<div class="col-sm-6">
+    <div class="well">
+        <form action="submitCheck" id="submitCheck" method="post" id="check">
+            <h4>Payment Checking Form​</h4>
+            <p>
+                <label>Customer Name*</label>
+                <input name="check_name" type="text" class="form-control">
+            </p>
+            <p>
+                <label>Payment Reference Code*</label>
+                <input name="check_code" type="text" class="form-control">
+            </p>
+            <input type="submit" value="check" />
+        </form>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="well">
+        <div class='card-wrapper'></div>
+    </div>
+</div>
+<script src="./js/payment.js"></script>
+</body>
+</html>

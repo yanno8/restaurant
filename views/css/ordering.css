@@ -1,0 +1,47 @@
+
+.image-ronde-bg {
+    background-size: contain;
+    background-position: 50% 50%;
+    background-image: url(../images/order.jpg);
+    display: inline-block;
+    width: 350px;
+    height: 350px;
+    border: none;
+    position: absolute;
+    bottom: 50%;
+    left: 100%;
+    -moz-border-raduis: 75px;
+    -webkit-border-raduis: 75px;
+    border-radius: 75px;
+  }
+  /*body,
+   table,
+      thead,
+      tr,
+      tbody,
+      th,
+      td {
+          text-align: center;
+      }*/
+      body{
+        text-align: center !important;
+        background-color: #a96700;
+    }
+    p{
+        position: relative;
+        right: 30%;
+        margin-top: 20px;
+        font-size: 30px;
+    }
+    input{
+        text-align: center;
+    }
+    form {
+      position: relative;
+      right: 30%;
+    }
+    .mssg{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }

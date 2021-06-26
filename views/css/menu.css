@@ -33,7 +33,7 @@ body {
   font-size: 40px;
   text-align: center;
   line-height: 1.4;
-  color: #2980b9;
+  color: #a96700;
 }
 
 .dropdown a {
@@ -43,15 +43,15 @@ body {
   position: relative;
   display: block;
   color: white;
-  background: #2980b9;
-  -moz-box-shadow: 0 1px 0 #409ad5 inset, 0 -1px 0 #20638f inset;
-  -webkit-box-shadow: 0 1px 0 #409ad5 inset, 0 -1px 0 #20638f inset;
-  box-shadow: 0 1px 0 #409ad5 inset, 0 -1px 0 #20638f inset;
+  background: #a96700;
+  -moz-box-shadow: 0 1px 0 #a96700 inset, 0 -1px 0 #fcfdfd inset;
+  -webkit-box-shadow: 0 1px 0 #a96700 inset, 0 -1px 0 #fcfdfd inset;
+  box-shadow: 0 1px 0 #a96700 inset, 0 -1px 0 #f4f4f5 inset;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
   padding: 10px;
 }
 .dropdown [data-toggle="dropdown"]:hover {
-  background: #2c89c6;
+  background: #eebf26;
 }
 .dropdown .icon-arrow {
   position: absolute;
