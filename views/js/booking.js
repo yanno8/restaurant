@@ -1,6 +1,6 @@
 // envoi du full-name et du message
 
-$("#submit").on("click", function (e) {
+$("input[name=submit]").on("click", function (e) {
   e.preventDefault();
   var message = {
     title : $("#title").val(),
@@ -14,14 +14,10 @@ $("#submit").on("click", function (e) {
     table : $("#table").val()
   };
   if (message.firstName.trim().length !== 0 && message.lastName.trim().length !== 0 && message.date.trim().length !== 0 && message.time.trim().length !== 0 && message.title.trim().length !== 0 && message.place.trim().length !== 0) {
-  socket.emit("chat-message", message);
+  socket.emit("booking", message);
   console.log(message);
   }
-});
-
-/*socket.on('char-message', function (message) {
-  console.log(message);
-});*/   
+})
 
 $(document).on("ready", function () {
 
@@ -30,7 +26,7 @@ $(document).on("ready", function () {
 
       $.ajax({
           type: 'POST',
-          url: '/booking',
+          url: '/confirmation',
           data: $('#form1').serialize(),
           dataType: "json",
           success: (response) => {
@@ -43,7 +39,7 @@ $(document).on("ready", function () {
                    setTimeout( () => {
                        document.getElementById("check").innerHTML="";
                    },3000);
-                   if (response.Success=="You are registered,You can login now.") {
+                   if (response.Success=="Your booking is done.") {
                        document.getElementById("aaa").click();
                    };
                },

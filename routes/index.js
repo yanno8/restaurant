@@ -8,7 +8,8 @@ var express = require('express'),
     Admin = require('../models/admin'),
 	Booking = require('../models/booking'),
 	Payment = require('../models/payment'),
-	Ordering = require('../models/ordering');
+	Ordering = require('../models/ordering'),
+	nodemailer = require("nodemailer");
 
 //config paypal
 paypal.configure({
@@ -31,7 +32,7 @@ router.post('/booking', (req, res, next) => {
     if (bookingInfo.telephone.length != 9) {
     res.send({ msg: 'the phone number must be 9 numbers' });
 	}
-	if (!bookingInfo.email || !bookingInfo.city || !bookingInfo.telephone || !bookingInfo.confEmail || !bookingInfo.lastName || !bookingInfo.date || !bookingInfo.firstName || !bookingInfo.time || !bookingInfo.table) {
+	if (!bookingInfo.email || !bookingInfo.city || !bookingInfo.telephone || !bookingInfo.confEmail || !bookingInfo.lastName || !bookingInfo.date || !bookingInfo.firstName || !bookingInfo.time || !bookingInfo.place) {
 	res.send();
 	} else {
 			if (!data) {
@@ -43,6 +44,7 @@ router.post('/booking', (req, res, next) => {
 						} else {
 							c = 1;
 					}
+					console.log(bookingInfo);
 					var booking = new Booking({
 						unique_id: c,
 						email: bookingInfo.email,
@@ -57,23 +59,50 @@ router.post('/booking', (req, res, next) => {
 						title: bookingInfo.title
 					});
 
-					booking.save((err, Person) => {
-						if (err)
-							console.log(err);
-						else
-							console.log('Success');
-					});
+					booking.save((err, Booking) => {
 
-					}).sort({ _id: -1 }).limit(1);
-					res.redirect('/confirmation');
-				} else {
-					res.redirect('/booking');
-			}
-		}
+                       /* var transporter = nodemailer.createTransport({
+							service: "Yahoo",
+							auth: {
+							  user: "yannesonwafomekong@yahoo.com",
+							  pass: process.env.passwordEmail
+							}
+						  });
+						  transporter.sendMail({
+							// email to the ADMIN
+							from: "Order Your Food",
+							to: `yannesonwafomekong@yahoo.com`,
+							subject: `New Ordering From ${title} ${firstName} ${lastName}`,
+							html: `<h2>New Ordering: </h2><br><br><h3>A new ordering is done by ${title} ${firstName} ${lastName} for ${date}.<br>He want to be delivered at ${place} ${city} at ${time} and he had ordered ${food}.<br>We can join him at this phone number ${telephone} or this email ${email}.</h3>`
+						  });
+						  transporter
+							.sendMail({
+							  // email to the CUSTOMER
+							  from: "Order Your Food",
+							  to: `${email}`,
+							  subject: `Ordering Confirmed`,
+							  html: `<h2>Ordering Confirmed: </h2><br><br><h3>We are confirmed you that your ordering is done.<br>you are ordered for ${food} for ${date} and you want to be delivered at ${place} ${city} at ${time}.</h3>`
+							})*/
+						    if (err)
+						    	console.log(err);
+						    else
+						    	console.log('Success');
+					    });
+
+					    }).sort({ _id: -1 }).limit(1);
+					    res.redirect('/confirmation');
+				    } else {
+				    	res.redirect('/booking');
+			    }
+		    }
 });
 
 router.get('/confirmation', (req, res, next) => {
 	return res.render('confirmation.html');
+});
+
+router.get('/confirm', (req, res, next) => {
+	return res.render('confirm.html');
 });
 
 router.get('/message', (req, res, next) => {
@@ -390,23 +419,46 @@ router.post('/ordering', (req, res, next) => {
 						telephone: orderingInfo.telephone,
 						confEmail: orderingInfo.confEmail,
 						time: orderingInfo.time,
-						foods: orderingInfo.foods,
+						food: orderingInfo.foods,
 						title: orderingInfo.title
 					});
 
-					ordering.save((err, Person) => {
-						if (err)
-							console.log(err);
-						else
-							console.log('Success');
-					});
+					ordering.save((err, Ordering) => {
 
-					}).sort({ _id: -1 }).limit(1);
-					res.redirect('/payment');
-				} else {
-					res.redirect('/ordering');
-			}
-		}
+                       /* var transporter = nodemailer.createTransport({
+							service: "Yahoo",
+							auth: {
+							  user: "yannesonwafomekong@yahoo.com",
+							  pass: process.env.passwordEmail
+							}
+						  });
+						  transporter.sendMail({
+							// email to the ADMIN
+							from: "Order Your Food",
+							to: `yannesonwafomekong@yahoo.com`,
+							subject: `New Ordering From ${title} ${firstName} ${lastName}`,
+							html: `<h2>New Ordering: </h2><br><br><h3>A new ordering is done by ${title} ${firstName} ${lastName} for ${date}.<br>He want to be delivered at ${place} ${city} at ${time} and he had ordered ${food}.<br>We can join him at this phone number ${telephone} or this email ${email}.</h3>`
+						  });
+						  transporter
+							.sendMail({
+							  // email to the CUSTOMER
+							  from: "Order Your Food",
+							  to: `${email}`,
+							  subject: `Ordering Confirmed`,
+							  html: `<h2>Ordering Confirmed: </h2><br><br><h3>We are confirmed you that your ordering is done.<br>you are ordered for ${food} for ${date} and you want to be delivered at ${place} ${city} at ${time}.</h3>`
+							})*/
+						    if (err)
+						    	console.log(err);
+						    else
+						    	console.log('Success');
+					    });
+
+					    }).sort({ _id: -1 }).limit(1);
+					    res.redirect('/confirm');
+				    } else {
+				    	res.redirect('/ordering');
+			    }
+		    }
 });
 
 router.get('/forget-pass', (req, res, next) => {
@@ -470,7 +522,7 @@ router.post('/submitOrder', function (req, res) {
                     currency: req.body.currency,
                     phone: req.body.phone,
                     paymentid: payment.id,
-                    status: 'open',
+                    status: 'pending',
                     lastupdatetime: new Date()
                 })
                 payment.save(function (error, data) {

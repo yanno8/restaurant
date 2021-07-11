@@ -1,1 +1,26 @@
 node_modules
+
+/*var transporter = nodemailer.createTransport({
+							service: "Yahoo",
+							auth: {
+							  user: "yannesonwafomekong@yahoo.com",
+							  pass: process.env.passwordEmail
+							}
+						  });
+						  transporter.sendMail({
+							// email to the ADMIN
+							from: "Order Your Food",
+							to: `yannesonwafomekong@yahoo.com`,
+							subject: `New Booking From ${title} ${firstName} ${lastName}`,
+							html: `<h2>New Booking: </h2><br><br><h3>A new booking is done by ${title} ${firstName} ${lastName} for ${date} at ${time}.<br>He booked for a table of ${table} at ${city}.<br>We can join him at this phone number ${telephone} or this email ${email}.</h3>`
+						  });
+						  transporter
+							.sendMail({
+							  // email to the CUSTOMER
+							  from: "Order Your Food",
+							  to: `${email}`,
+							  subject: `Booking Confirmed`,
+							  html: `<h2>Booking Confirmed: </h2><br><br><h3>We are confirmed you ${title} ${firstName} ${lastName} that your booking is done.<br>you are booked for a table of ${table} for ${date} at ${time}.</h3>`
+							})*/
+
+                         

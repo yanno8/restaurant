@@ -32,11 +32,18 @@ io.on('connection', function (socket) {
   socket.join('room1')
   // console.log('new client connected: ' + socket.id);
 
-  // reception et émission du message et full-name
+  // reception of booking information
 
-  socket.on('chat-message', function (message) {
+  socket.on('booking', function (message) {
   // console.log('from booking: ', message);
-  socket.to('room1').emit('char-message', message);
+  socket.to('room1').emit('book', message);
+  });
+
+  // reception of ordering information
+
+  socket.on('ordering', function (message) {
+  // console.log('from booking: ', message);
+  socket.to('room1').emit('order', message);
   });
 });
 

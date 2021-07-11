@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
     name: String,
     price: Number,
     currency: String,
-    phone: String,
+    phone: Number,
     paymentid: String,
     lastupdatetime: Date,
     status: String,

@@ -18,28 +18,28 @@
         <form id="form1" method="post">
 
           <label>Title</label> 
-          <input type="text" name="title" placeholder="" required="" class="form-control"><br/>
+          <input id="title" type="text" name="title" placeholder="" required="" class="form-control"><br/>
           <label>First Name</label> 
-          <input type="text" name="firstName" placeholder="" required="" class="form-control"><br/>
+          <input id="first" type="text" name="firstName" placeholder="" required="" class="form-control"><br/>
           <label>Last Name</label> 
-          <input type="text" name="lastName" placeholder="" required="" class="form-control"><br/>
+          <input id="last" type="text" name="lastName" placeholder="" required="" class="form-control"><br/>
           <label>Email</label> 
           <input type="email" name="email" placeholder="" required="" class="form-control"><br/>
           <label>Confirm Email</label> 
           <input type="email" name="confEmail" placeholder="" required="" class="form-control"><br/>
           <label>telephone</label> 
-          <input type="text" name="telephone" placeholder="" required="" class="form-control"><br/>
+          <input id="phone" type="text" name="telephone" placeholder="" required="" class="form-control"><br/>
           <label>City</label> 
-          <input type="text" name="city" placeholder="" required="" class="form-control"><br/>
+          <input id="city" type="text" name="city" placeholder="" required="" class="form-control"><br/>
           <label>Place</label> 
-          <input type="text" name="place" placeholder="" required="" class="form-control"><br/>
-          <label>Foods</label> 
-          <input type="text" name="foods" placeholder="" required="" class="form-control"><br/>
+          <input id="place" type="text" name="place" placeholder="" required="" class="form-control"><br/>
+          <label>Food</label> 
+          <input id="food" type="text" name="food" placeholder="" required="" class="form-control"><br/>
           <label>Date</label> 
-          <input type="date" name="date" placeholder="" required="" class="form-control"><br/>
+          <input id="date" type="date" name="date" placeholder="" required="" class="form-control"><br/>
           <label>Time</label> 
-          <input type="time" name="time" placeholder="" required="" class="form-control"><br/>
-          <input type="submit" value="Register" class="btn btn-success">
+          <input id="time" type="time" name="time" placeholder="" required="" class="form-control"><br/>
+          <input type="submit" value="Confirm" class="btn btn-success">
         </form>
       </div>
       
@@ -47,9 +47,18 @@
       <div class="mssg bg-danger">
         <span id="check"></span>
       </div>
-      <div id="LangTable"><a href="/login" id="aaa"></a>
+      <div id="LangTable"><a href="/confirm" id="aaa"></a>
       </div>
     </div>
+    <script 
+    src="http://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous">
+  </script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>            
+    var socket = io.connect('http://localhost:8080');        
+  </script>
   <script src="./js/ordering.js"></script>
 </body>
 </html>

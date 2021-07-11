@@ -2,12 +2,23 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300|Lato:300,400);
 /* Miles and miles of style */
 body {
-  background: #855082 url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/13034/graidlight.jpg");
+  background: #a96700;
   background-size: cover;
   font-family: 'Lato', sans-serif;
   line-height: 1.4;
   font-weight: 300;
   margin: 3em 0;
+}
+
+#payment {
+  position: absolute;
+  left: 65%;
+  top: 69%;
+}
+
+#ordering {
+  position: relative;
+  right: 30%;
 }
 
 section {
@@ -31,7 +42,7 @@ section {
 }
 
 h2 {
-  color: #CB326F;
+  color: #a96700;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 40px;
   font-size: 2rem;
@@ -69,7 +80,7 @@ button {
   padding: 0 5%;
   border: none;
   border-radius: 4px;
-  background-color: #1A9DB4;
+  background-color: whitesmoke;
   color: whitesmoke;
   font-size: 1em;
   font-family: 'Lato', sans-serif;
@@ -78,7 +89,7 @@ button {
   transition: background-color .3s ease-out;
 }
 button:hover {
-  background-color: #CB326F;
+  background-color: #eebf26;
 }
 
 section {
